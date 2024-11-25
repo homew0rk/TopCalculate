@@ -1,0 +1,114 @@
+﻿<Window x:Class="TopCalculate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Норм калькулятор" Height="600" Width="500"
+        Background="#121212">
+    <!-- Перемещаем определение ресурсов сюда -->
+    <Window.Resources>
+        <Style x:Key="SelectedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <!-- Зеленый фон для выбранной кнопки -->
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#388E3C"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <TabControl Background="#1E1E1E" BorderBrush="#424242" BorderThickness="2">
+            <!-- Вкладка: Вещественные числа -->
+            <TabItem Header="Вещественные числа">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Ввод данных -->
+                    <StackPanel Grid.Row="0" Margin="0 0 0 10" HorizontalAlignment="Center">
+                        <!-- Метка и поле для первого числа -->
+                        <Label x:Name="lblInput1" Content="Первое число:" HorizontalAlignment="Center" Foreground="White" Visibility="Visible"/>
+                        <TextBox x:Name="txtInput1" Width="300" HorizontalAlignment="Center" Visibility="Visible"/>
+
+                        <!-- Метка и поле для второго числа -->
+                        <Label x:Name="lblInput2" Content="Второе число:" HorizontalAlignment="Center" Foreground="White" Visibility="Collapsed"/>
+                        <TextBox x:Name="txtInput2" Width="300" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                    </StackPanel>
+
+                    <!-- Выбор операций -->
+                    <WrapPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0 10">
+                        <Button x:Name="btnAdd" Content="+" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnSubtract" Content="-" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnMultiply" Content="*" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnDivide" Content="/" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnPower" Content="^" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnSqrt" Content="√" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnSin" Content="sin" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnCos" Content="cos" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnTan" Content="tan" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnArcsin" Content="arcsin" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnArccos" Content="arccos" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnArctan" Content="arctan" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnCot" Content="cot" Width="50" Click="Operation_Click"/>
+                        <Button x:Name="btnArccot" Content="arccot" Width="50" Click="Operation_Click"/>
+                    </WrapPanel>
+
+                    <!-- Управление -->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10">
+                        <Button x:Name="btnCalculateReal" Content="Рассчитать" Width="100" Click="BtnCalculateReal_Click"/>
+                        <Button x:Name="btnClearReal" Content="Очистить" Width="100" Click="BtnClearReal_Click"/>
+                    </StackPanel>
+
+                    <!-- Результат -->
+                    <TextBlock x:Name="lblResultReal" Grid.Row="3" FontSize="16" FontWeight="Bold" Text="Результат:" TextAlignment="Center" Margin="0 10"/>
+                    <ListBox x:Name="lstHistoryReal" Grid.Row="4" Margin="10"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Вкладка: Комплексные числа -->
+            <TabItem Header="Комплексные числа">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Ввод данных -->
+                    <StackPanel Grid.Row="0" Margin="0 0 0 10" HorizontalAlignment="Center">
+                        <Label Content="Первое комплексное число (действительная часть):" Foreground="#FFFFF9F9" />
+                        <TextBox x:Name="txtReal1" Width="150"/>
+                        <Label Content="Первое комплексное число (мнимая часть):" Foreground="#FFFFF7F7" />
+                        <TextBox x:Name="txtImaginary1" Width="150"/>
+                        <Label Content="Второе комплексное число (действительная часть):" Foreground="White" />
+                        <TextBox x:Name="txtReal2" Width="150"/>
+                        <Label Content="Второе комплексное число (мнимая часть):" Foreground="White" />
+                        <TextBox x:Name="txtImaginary2" Width="150"/>
+                    </StackPanel>
+
+                    <!-- Операции -->
+                    <WrapPanel Grid.Row="1" HorizontalAlignment="Center" Margin="0 10">
+                        <Button x:Name="btnComplexAdd" Content="+" Width="60" Click="ComplexOperation_Click"/>
+                        <Button x:Name="btnComplexSubtract" Content="-" Width="60" Click="ComplexOperation_Click"/>
+                        <Button x:Name="btnComplexMultiply" Content="*" Width="60" Click="ComplexOperation_Click"/>
+                        <Button x:Name="btnComplexDivide" Content="/" Width="60" Click="ComplexOperation_Click"/>
+                    </WrapPanel>
+
+                    <!-- Управление -->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10">
+                        <Button x:Name="btnCalculateComplex" Content="Рассчитать" Width="120" Click="BtnCalculateComplex_Click"/>
+                        <Button x:Name="btnClearComplex" Content="Очистить" Width="120" Click="BtnClearComplex_Click"/>
+                    </StackPanel>
+
+                    <!-- Результат -->
+                    <TextBlock x:Name="lblResultComplex" Grid.Row="3" FontSize="16" FontWeight="Bold" Text="Результат:" TextAlignment="Center" Margin="0 10"/>
+                    <ListBox x:Name="lstHistoryComplex" Grid.Row="4" Margin="10"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
+
+
